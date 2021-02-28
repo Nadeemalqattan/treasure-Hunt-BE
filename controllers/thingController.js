@@ -29,9 +29,6 @@ exports.treasureList = async (req, res, next) => {
 
 exports.thingCreate = async (req, res, next) => {
   try {
-    if (req.file) {
-      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
-    }
     const newThing = await Thing.create(req.body);
     res.status(201).json(newThing);
   } catch (error) {
@@ -40,9 +37,6 @@ exports.thingCreate = async (req, res, next) => {
 };
 
 exports.thingUpdate = async (req, res, next) => {
-  if (req.file) {
-    req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
-  }
   const updatedThing = await req.thing.update(req.body);
   res.status(200).json(updatedThing);
 };
